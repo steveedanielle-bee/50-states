@@ -49,6 +49,31 @@ header h1 {
     backdrop-filter: blur(10px);
 }
 
+.header-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn-zoom {
+    background: rgba(52, 199, 89, 0.9);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-zoom:hover {
+    background: rgba(52, 199, 89, 1);
+    transform: translateY(-2px);
+}
+
 .btn-clear {
     background: rgba(255, 59, 48, 0.9);
     color: white;
@@ -235,6 +260,59 @@ header h1 {
     color: #999;
 }
 
+/* Compact/Zoomed Out View */
+body.compact-view .states-container {
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 12px;
+}
+
+body.compact-view .state-tile {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+body.compact-view .state-tile:hover {
+    transform: translateY(-2px);
+}
+
+body.compact-view .state-name {
+    font-size: 1rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    min-width: 140px;
+    flex-shrink: 0;
+}
+
+body.compact-view .features-list {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 0;
+    flex: 1;
+}
+
+body.compact-view .feature-row {
+    padding: 0;
+    border-bottom: none;
+    display: block;
+}
+
+body.compact-view .feature-label {
+    display: none;
+}
+
+body.compact-view .status-toggle {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+}
+
+body.compact-view .mrr-section {
+    display: none;
+}
+
 @media (max-width: 768px) {
     header h1 {
         font-size: 1.8rem;
@@ -269,7 +347,10 @@ header h1 {
                 <span class="status-icon status-warning">!</span> in progress
             </div>
         </div>
-        <button id="clearData" class="btn-clear">Clear All Data</button>
+        <div class="header-buttons">
+            <button id="zoomToggle" class="btn-zoom">Zoom Out</button>
+            <button id="clearData" class="btn-clear">Clear All Data</button>
+        </div>
     </header>
 
     <main>
@@ -492,9 +573,27 @@ function clearAllData() {
     }
 }
 
+// Toggle compact/zoomed out view
+function toggleZoom() {
+    const body = document.body;
+    const zoomButton = document.getElementById('zoomToggle');
+
+    if (body.classList.contains('compact-view')) {
+        body.classList.remove('compact-view');
+        zoomButton.textContent = 'Zoom Out';
+    } else {
+        body.classList.add('compact-view');
+        zoomButton.textContent = 'Zoom In';
+    }
+}
+
 // Initialize the app
 function init() {
     renderStates();
+
+    // Add zoom toggle button handler
+    const zoomButton = document.getElementById('zoomToggle');
+    zoomButton.addEventListener('click', toggleZoom);
 
     // Add clear data button handler
     const clearButton = document.getElementById('clearData');

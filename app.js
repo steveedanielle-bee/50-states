@@ -211,9 +211,27 @@ function clearAllData() {
     }
 }
 
+// Toggle compact/zoomed out view
+function toggleZoom() {
+    const body = document.body;
+    const zoomButton = document.getElementById('zoomToggle');
+
+    if (body.classList.contains('compact-view')) {
+        body.classList.remove('compact-view');
+        zoomButton.textContent = 'Zoom Out';
+    } else {
+        body.classList.add('compact-view');
+        zoomButton.textContent = 'Zoom In';
+    }
+}
+
 // Initialize the app
 function init() {
     renderStates();
+
+    // Add zoom toggle button handler
+    const zoomButton = document.getElementById('zoomToggle');
+    zoomButton.addEventListener('click', toggleZoom);
 
     // Add clear data button handler
     const clearButton = document.getElementById('clearData');
