@@ -188,6 +188,18 @@ function createStateTile(state) {
     mrrSection.appendChild(mrrInputWrapper);
     tile.appendChild(mrrSection);
 
+    // Add click handler for expanding/collapsing in compact view
+    tile.addEventListener('click', (e) => {
+        // Only toggle if in compact view and not clicking on interactive elements
+        if (document.body.classList.contains('compact-view')) {
+            // Don't toggle if clicking on buttons or inputs
+            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
+                return;
+            }
+            tile.classList.toggle('expanded');
+        }
+    });
+
     return tile;
 }
 

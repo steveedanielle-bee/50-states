@@ -313,6 +313,60 @@ body.compact-view .mrr-section {
     display: none;
 }
 
+/* Individual expanded state in compact view */
+body.compact-view .state-tile.expanded {
+    padding: 20px;
+    display: block;
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+body.compact-view .state-tile.expanded .state-name {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #667eea;
+    min-width: auto;
+}
+
+body.compact-view .state-tile.expanded .features-list {
+    display: block;
+    margin-bottom: 15px;
+}
+
+body.compact-view .state-tile.expanded .feature-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+body.compact-view .state-tile.expanded .feature-row:last-child {
+    border-bottom: none;
+}
+
+body.compact-view .state-tile.expanded .feature-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+body.compact-view .state-tile.expanded .status-toggle {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+}
+
+body.compact-view .state-tile.expanded .mrr-section {
+    display: block;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #f0f0f0;
+}
+
 @media (max-width: 768px) {
     header h1 {
         font-size: 1.8rem;
@@ -549,6 +603,18 @@ function createStateTile(state) {
     mrrSection.appendChild(mrrLabel);
     mrrSection.appendChild(mrrInputWrapper);
     tile.appendChild(mrrSection);
+
+    // Add click handler for expanding/collapsing in compact view
+    tile.addEventListener('click', (e) => {
+        // Only toggle if in compact view and not clicking on interactive elements
+        if (document.body.classList.contains('compact-view')) {
+            // Don't toggle if clicking on buttons or inputs
+            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
+                return;
+            }
+            tile.classList.toggle('expanded');
+        }
+    });
 
     return tile;
 }
