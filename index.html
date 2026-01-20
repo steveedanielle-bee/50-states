@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 States - BeePurple Feature Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>BeePurple Feature Tracker - 50 States</h1>
+        <div class="legend">
+            <div class="legend-item">
+                <span class="status-icon status-check">✓</span> Available
+            </div>
+            <div class="legend-item">
+                <span class="status-icon status-x">✗</span> Not Available
+            </div>
+            <div class="legend-item">
+                <span class="status-icon status-warning">!</span> Partial/Pending
+            </div>
+        </div>
+        <button id="clearData" class="btn-clear">Clear All Data</button>
+    </header>
+
+    <main>
+        <div id="statesContainer" class="states-container">
+            <!-- State tiles will be dynamically generated here -->
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

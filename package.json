@@ -1,0 +1,13 @@
+{
+  "name": "50-states-tracker",
+  "version": "1.0.0",
+  "description": "Simple web app to track beepurple features across all 50 US states with MRR tracking",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server ."
+  },
+  "keywords": ["states", "tracking", "mrr"],
+  "author": "",
+  "license": "MIT"
+}
