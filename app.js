@@ -23,8 +23,8 @@ const features = [
     { name: 'state', icon: '🏛️' }
 ];
 
-// Status cycle: none -> check -> x -> warning -> none
-const statusCycle = ['none', 'check', 'x', 'warning'];
+// Status cycle: none -> check -> x -> warning -> yellow -> none
+const statusCycle = ['none', 'check', 'x', 'warning', 'yellow'];
 
 // Storage key
 const STORAGE_KEY = 'beepurple-states-data';
@@ -79,6 +79,8 @@ function getStatusSymbol(status) {
             return '✗';
         case 'warning':
             return '!';
+        case 'yellow':
+            return '';
         default:
             return '';
     }

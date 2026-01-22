@@ -190,6 +190,12 @@ header h1 {
     color: white;
 }
 
+.status-toggle.status-yellow {
+    background: #ffcc00;
+    border-color: #ffcc00;
+    color: transparent;
+}
+
 .status-icon {
     font-weight: bold;
     font-size: 1.1rem;
@@ -205,6 +211,10 @@ header h1 {
 
 .status-icon.status-warning {
     color: #ff9500;
+}
+
+.status-icon.status-yellow {
+    color: #ffcc00;
 }
 
 .mrr-section {

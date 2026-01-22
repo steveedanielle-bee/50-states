@@ -197,6 +197,12 @@ header h1 {
     color: white;
 }
 
+.status-toggle.status-yellow {
+    background: #ffcc00;
+    border-color: #ffcc00;
+    color: transparent;
+}
+
 .status-icon {
     font-weight: bold;
     font-size: 1.1rem;
@@ -212,6 +218,10 @@ header h1 {
 
 .status-icon.status-warning {
     color: #ff9500;
+}
+
+.status-icon.status-yellow {
+    color: #ffcc00;
 }
 
 .mrr-section {
@@ -400,6 +410,9 @@ body.compact-view .state-tile.expanded .mrr-section {
             <div class="legend-item">
                 <span class="status-icon status-warning">!</span> in progress
             </div>
+            <div class="legend-item">
+                <span class="status-icon status-yellow">■</span> evaluating
+            </div>
         </div>
         <div class="header-buttons">
             <button id="zoomToggle" class="btn-zoom">Zoom Out</button>
@@ -440,7 +453,7 @@ const features = [
 ];
 
 // Status cycle: none -> check -> x -> warning -> none
-const statusCycle = ['none', 'check', 'x', 'warning'];
+const statusCycle = ['none', 'check', 'x', 'warning', 'yellow'];
 
 // Storage key
 const STORAGE_KEY = 'beepurple-states-data';
@@ -495,6 +508,8 @@ function getStatusSymbol(status) {
             return '✗';
         case 'warning':
             return '!';
+        case 'yellow':
+            return '';
         default:
             return '';
     }
