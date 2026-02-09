@@ -263,6 +263,65 @@ header h1 {
     color: #999;
 }
 
+/* Email Section */
+.email-section {
+    margin-top: 10px;
+}
+
+.email-toggle {
+    background: rgba(103, 126, 234, 0.1);
+    color: #667eea;
+    border: 1px solid #667eea;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: left;
+}
+
+.email-toggle:hover {
+    background: rgba(103, 126, 234, 0.2);
+}
+
+.email-collapse {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.email-collapse.open {
+    max-height: 100px;
+    margin-top: 10px;
+}
+
+.email-label {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.email-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.email-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.email-input::placeholder {
+    color: #999;
+}
+
 /* Compact/Zoomed Out View */
 body.compact-view .states-container {
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
@@ -313,6 +372,10 @@ body.compact-view .status-toggle {
 }
 
 body.compact-view .mrr-section {
+    display: none;
+}
+
+body.compact-view .email-section {
     display: none;
 }
 
@@ -368,6 +431,10 @@ body.compact-view .state-tile.expanded .mrr-section {
     margin-top: 15px;
     padding-top: 15px;
     border-top: 2px solid #f0f0f0;
+}
+
+body.compact-view .state-tile.expanded .email-section {
+    display: block;
 }
 
 /* Responsive design */

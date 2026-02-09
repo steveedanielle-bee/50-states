@@ -52,7 +52,8 @@ function initializeData() {
     states.forEach(state => {
         data[state] = {
             features: {},
-            mrr: ''
+            mrr: '',
+            email: ''
         };
         features.forEach(feature => {
             data[state].features[feature.name] = 'none';
@@ -99,6 +100,12 @@ function toggleStatus(state, featureName) {
 // Update MRR value
 function updateMRR(state, value) {
     statesData[state].mrr = value;
+    saveData();
+}
+
+// Update email value
+function updateEmail(state, value) {
+    statesData[state].email = value;
     saveData();
 }
 
@@ -189,6 +196,60 @@ function createStateTile(state) {
     mrrSection.appendChild(mrrLabel);
     mrrSection.appendChild(mrrInputWrapper);
     tile.appendChild(mrrSection);
+
+    // Email section with toggle
+    const emailSection = document.createElement('div');
+    emailSection.className = 'email-section';
+
+    const emailToggle = document.createElement('button');
+    emailToggle.className = 'email-toggle';
+    emailToggle.textContent = '+ Add Email';
+    emailToggle.type = 'button';
+
+    const emailCollapse = document.createElement('div');
+    emailCollapse.className = 'email-collapse';
+
+    const emailLabel = document.createElement('div');
+    emailLabel.className = 'email-label';
+    emailLabel.textContent = 'Email Address';
+
+    const emailInput = document.createElement('input');
+    emailInput.className = 'email-input';
+    emailInput.type = 'email';
+    emailInput.placeholder = 'contact@example.com';
+    emailInput.value = statesData[state].email || '';
+
+    // Toggle email section visibility
+    emailToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        emailCollapse.classList.toggle('open');
+        if (emailCollapse.classList.contains('open')) {
+            emailToggle.textContent = '− Hide Email';
+        } else {
+            emailToggle.textContent = '+ Add Email';
+        }
+    });
+
+    // Add input handler with debouncing
+    let emailTimeout;
+    emailInput.addEventListener('input', (e) => {
+        e.stopPropagation();
+        clearTimeout(emailTimeout);
+        emailTimeout = setTimeout(() => {
+            updateEmail(state, e.target.value);
+        }, 500);
+    });
+
+    // Prevent input from toggling tile expansion in compact view
+    emailInput.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    emailCollapse.appendChild(emailLabel);
+    emailCollapse.appendChild(emailInput);
+    emailSection.appendChild(emailToggle);
+    emailSection.appendChild(emailCollapse);
+    tile.appendChild(emailSection);
 
     // Add click handler for expanding/collapsing in compact view
     tile.addEventListener('click', (e) => {
